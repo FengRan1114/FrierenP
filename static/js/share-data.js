@@ -1,6 +1,5 @@
-// static/js/share-data.js - Share页面数据+渲染逻辑
+// static/js/share-data.js - 最终版：关闭自动播放/弹幕，显示完整控件
 const shareData = {
-    // 视频数据
     videos: [
         {
             name: "并不是打穿天山容易，而是天山那头有人民",
@@ -19,7 +18,6 @@ const shareData = {
             thought: "阿盼感悟：为辛梅尔的爱动容"
         }
     ],
-    // 图片数据
     images: [
         { src: "./static/img/share1.jpg", alt: "风景照1" },
         { src: "./static/img/share2.jpg", alt: "风景照2" },
@@ -27,7 +25,6 @@ const shareData = {
         { src: "./static/img/share4.jpg", alt: "生活照2" },
         { src: "./static/img/share5.jpg", alt: "生活照3" }
     ],
-    // 音乐数据
     musics: [
         {
             cover: "./static/img/i43.png",
@@ -44,9 +41,8 @@ const shareData = {
     ]
 };
 
-// 统一渲染函数（只保留这一套）
 function renderSharePage() {
-    // ========== 渲染视频列表 ==========
+    // 渲染视频列表（核心：B站嵌入参数全优化）
     const videoListEl = document.querySelector('.video-list');
     if (shareData.videos && shareData.videos.length > 0) {
         let videoHtml = '';
@@ -54,11 +50,19 @@ function renderSharePage() {
             const bvid = video.b站链接.split('/').pop();
             videoHtml += `
                 <div class="video-item">
-                    <!-- 把preload改为auto，解决点击转圈问题 -->
-                    <video poster="${video.cover}" preload="auto" controls>
-                        <source src="${video.src}" type="video/mp4">
-                        Your browser does not support video playback
-                    </video>
+                    <!-- 终极优化参数：关闭自动播放/弹幕，显示所有控件，静音默认关闭 -->
+                    <iframe 
+                        src="//player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1
+                        &autoplay=0&mute=0&controls=1&danmaku=0&loop=0&fullscreen=1"
+                        scrolling="no" 
+                        border="0" 
+                        frameborder="no" 
+                        framespacing="0" 
+                        allowfullscreen="true" 
+                        width="100%" 
+                        height="180"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                    ></iframe>
                     <div class="video-desc">
                         <div class="video-name">${video.name}</div>
                         <div class="video-link">
@@ -86,7 +90,7 @@ function renderSharePage() {
         videoListEl.innerHTML = videoHtml;
     }
 
-    // ========== 渲染图片列表 ==========
+    // 渲染图片列表（无修改）
     const imgGridEl = document.querySelector('.img-grid');
     if (shareData.images && shareData.images.length > 0) {
         let imgHtml = '';
@@ -100,7 +104,7 @@ function renderSharePage() {
         imgGridEl.innerHTML = imgHtml;
     }
 
-    // ========== 渲染音乐列表 ==========
+    // 渲染音乐列表（无修改）
     const musicListEl = document.querySelector('.music-list');
     if (shareData.musics && shareData.musics.length > 0) {
         let musicHtml = '';
@@ -125,5 +129,4 @@ function renderSharePage() {
     }
 }
 
-// 页面加载完成后自动渲染（只执行一次）
 window.addEventListener('DOMContentLoaded', renderSharePage);

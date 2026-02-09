@@ -9,15 +9,21 @@
     <!-- 引入公共样式 -->
     <link rel="stylesheet" href="./static/css/root.css">
     <link rel="stylesheet" href="./static/css/style.css">
-    <!-- 引入Share页面专属样式（所有样式都在这里） -->
+    <!-- 引入Share页面专属样式 -->
     <link rel="stylesheet" href="./static/css/share.css">
-    <!-- 移除内联样式：所有样式由share.css控制 -->
+    <style>
+        /* 新增：调整Back to Home按钮高度 */
+        .back-btn {
+            height: 56px; /* 原高度是自适应，现在固定56px，视觉上更高 */
+            align-items: center; /* 确保内容垂直居中 */
+        }
+    </style>
 </head>
 <body>
     <div class="zyyo-filter"></div>
 
     <div class="share-main">
-        <!-- 返回按钮：样式由share.css控制 -->
+        <!-- 返回按钮：高度通过新增样式调整，文字不变 -->
         <a href="./index.html" class="back-btn">
             <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <path d="M224 480h640c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
@@ -26,7 +32,7 @@
            Back to Home
         </a>
 
-        <!-- 页面标题 -->
+        <!-- 页面标题：保持My Share不变（你要求改板块标题为英文） -->
         <div class="share-title">
             <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <path d="M854.6 370.6c-9.9-39.7-46.2-66.6-87.4-66.6h-48.9c-17.4 0-33.4 6.9-45.1 18.9L512 569.9 351.8 322.9c-11.7-12-27.7-18.9-45.1-18.9H304c-41.2 0-77.6 26.9-87.4 66.6-12.8 51.3 30.9 96.9 83.3 96.9h63.9v240c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V467.8h73.3v240c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V467.8h63.9c52.4 0 96.1-45.6 83.3-97.2zM603.3 226.2c24.7 0 44.8-20.1 44.8-44.8s-20.1-44.8-44.8-44.8-44.8 20.1-44.8 44.8 20.1 44.8 44.8 44.8z"></path>
@@ -34,7 +40,7 @@
             My Share 
         </div>
 
-        <!-- 视频分享（英文标题） -->
+        <!-- 第一板块：视频分享 → 改为Video Sharing -->
         <div class="share-section">
             <div class="section-subtitle">
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -42,10 +48,11 @@
                 </svg>
                 Video Sharing
             </div>
+            <!-- 空容器：视频列表由JS渲染 -->
             <div class="video-list"></div>
         </div>
 
-        <!-- 图片分享（英文标题） -->
+        <!-- 第二板块：图片分享 → 改为Image Sharing -->
         <div class="share-section">
             <div class="section-subtitle">
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -53,10 +60,11 @@
                 </svg>
                 Image Sharing
             </div>
+            <!-- 空容器：图片列表由JS渲染 -->
             <div class="img-grid"></div>
         </div>
 
-        <!-- 音乐分享（英文标题） -->
+        <!-- 第三板块：音乐分享 → 改为Music Sharing（你要求的Music相关） -->
         <div class="share-section">
             <div class="section-subtitle">
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -64,12 +72,97 @@
                 </svg>
                 Music Sharing
             </div>
+            <!-- 空容器：音乐列表由JS渲染 -->
             <div class="music-list"></div>
         </div>
     </div>
 
-    <!-- 只保留数据文件和公共JS引入，渲染逻辑由share-data.js负责 -->
+    <!-- 1. 先引入数据文件 -->
     <script src="./static/js/share-data.js"></script>
+    <!-- 2. 再引入公共JS -->
     <script src="./static/js/script.js"></script>
+    <!-- 3. 新增渲染逻辑（也可以放到share-data.js里） -->
+    <script>
+        // 页面加载完成后执行渲染
+        window.addEventListener('DOMContentLoaded', function() {
+            // ========== 渲染视频列表 ==========
+            const videoListEl = document.querySelector('.video-list');
+            if (shareData.videos && shareData.videos.length > 0) {
+                let videoHtml = '';
+                shareData.videos.forEach(video => {
+                    // 提取B站链接最后的视频ID（如BV1FBrdBFEWe）
+                    const bvid = video.b站链接.split('/').pop();
+                    videoHtml += `
+                        <div class="video-item">
+                            <video poster="${video.cover}" preload="none" controls>
+                                <source src="${video.src}" type="video/mp4">
+                                你的浏览器不支持视频播放
+                            </video>
+                            <div class="video-desc">
+                                <div class="video-name">${video.name}</div>
+                                <div class="video-link">
+                                    <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
+                                        <path d="M820 208H204c-13.3 0-24 10.7-24 24v576c0 13.3 10.7 24 24 24h616c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24zm-600 560V264h512v504H220z m120-248h272v64H340v-64zm0 128h272v64H340v-64z"/>
+                                    </svg>
+                                    Bilibili Link: <a href="${video.b站链接}" target="_blank" rel="noopener noreferrer">${bvid}</a>
+                                </div>
+                                <div class="video-copyright">
+                                    <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
+                                        <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m104-420h-66.8c-10.2 0-18.5 8.3-18.5 18.5v32.9c0 10.2 8.3 18.5 18.5 18.5H512v66.8c0 10.2-8.3 18.5-18.5 18.5h-32.9c-10.2 0-18.5-8.3-18.5-18.5V512h-66.8c-10.2 0-18.5-8.3-18.5-18.5v-32.9c0-10.2 8.3-18.5 18.5-18.5H448v-66.8c0-10.2 8.3-18.5 18.5-18.5h32.9c10.2 0 18.5 8.3 18.5 18.5v66.8h66.8c10.2 0 18.5 8.3 18.5 18.5v32.9c0 10.2-8.3 18.5-18.5 18.5z"/>
+                                    </svg>
+                                    ${video.copyright}
+                                </div>
+                                <div class="video-thought">
+                                    <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
+                                        <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m-80-424c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16zm0 128c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16z"/>
+                                    </svg>
+                                    ${video.thought}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                videoListEl.innerHTML = videoHtml;
+            }
+
+            // ========== 渲染图片列表 ==========
+            const imgGridEl = document.querySelector('.img-grid');
+            if (shareData.images && shareData.images.length > 0) {
+                let imgHtml = '';
+                shareData.images.forEach(img => {
+                    imgHtml += `
+                        <div class="img-item">
+                            <img src="${img.src}" alt="${img.alt}">
+                        </div>
+                    `;
+                });
+                imgGridEl.innerHTML = imgHtml;
+            }
+
+            // ========== 渲染音乐列表 ==========
+            const musicListEl = document.querySelector('.music-list');
+            if (shareData.musics && shareData.musics.length > 0) {
+                let musicHtml = '';
+                shareData.musics.forEach(music => {
+                    musicHtml += `
+                        <div class="music-item">
+                            <div class="music-cover">
+                                <img src="${music.cover}" alt="${music.name} Cover">
+                            </div>
+                            <div class="music-info">
+                                <div class="music-name">${music.name}</div>
+                                <div class="music-singer">${music.singer}</div>
+                            </div>
+                            <audio controls preload="none">
+                                <source src="${music.src}" type="audio/mpeg">
+                                Your browser does not support audio playback
+                            </audio>
+                        </div>
+                    `;
+                });
+                musicListEl.innerHTML = musicHtml;
+            }
+        });
+    </script>
 </body>
 </html>
