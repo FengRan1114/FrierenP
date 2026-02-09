@@ -44,7 +44,7 @@ const shareData = {
     ]
 };
 
-// 渲染函数
+// 统一渲染函数（只保留这一套）
 function renderSharePage() {
     // ========== 渲染视频列表 ==========
     const videoListEl = document.querySelector('.video-list');
@@ -54,9 +54,10 @@ function renderSharePage() {
             const bvid = video.b站链接.split('/').pop();
             videoHtml += `
                 <div class="video-item">
-                    <video poster="${video.cover}" preload="none" controls>
+                    <!-- 把preload改为auto，解决点击转圈问题 -->
+                    <video poster="${video.cover}" preload="auto" controls>
                         <source src="${video.src}" type="video/mp4">
-                        你的浏览器不支持视频播放
+                        Your browser does not support video playback
                     </video>
                     <div class="video-desc">
                         <div class="video-name">${video.name}</div>
@@ -64,7 +65,7 @@ function renderSharePage() {
                             <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
                                 <path d="M820 208H204c-13.3 0-24 10.7-24 24v576c0 13.3 10.7 24 24 24h616c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24zm-600 560V264h512v504H220z m120-248h272v64H340v-64zm0 128h272v64H340v-64z"/>
                             </svg>
-                            B站链接：<a href="${video.b站链接}" target="_blank" rel="noopener noreferrer">${bvid}</a>
+                            Bilibili Link: <a href="${video.b站链接}" target="_blank" rel="noopener noreferrer">${bvid}</a>
                         </div>
                         <div class="video-copyright">
                             <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
@@ -107,7 +108,7 @@ function renderSharePage() {
             musicHtml += `
                 <div class="music-item">
                     <div class="music-cover">
-                        <img src="${music.cover}" alt="${music.name} 封面">
+                        <img src="${music.cover}" alt="${music.name} Cover">
                     </div>
                     <div class="music-info">
                         <div class="music-name">${music.name}</div>
@@ -115,7 +116,7 @@ function renderSharePage() {
                     </div>
                     <audio controls preload="none">
                         <source src="${music.src}" type="audio/mpeg">
-                        你的浏览器不支持音频播放
+                        Your browser does not support audio playback
                     </audio>
                 </div>
             `;
@@ -124,5 +125,5 @@ function renderSharePage() {
     }
 }
 
-// 页面加载完成后自动渲染
+// 页面加载完成后自动渲染（只执行一次）
 window.addEventListener('DOMContentLoaded', renderSharePage);
