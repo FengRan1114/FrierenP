@@ -1,0 +1,274 @@
+/* static/css/share.css - Share页面专属样式 */
+/* 全局样式 */
+.share-main {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.share-title {
+    font-size: 32px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--main_text_color);
+}
+.share-title svg {
+    width: 36px;
+    height: 36px;
+    fill: var(--fill);
+}
+.share-section {
+    background: var(--item_bg_color);
+    border-radius: 13px;
+    padding: 25px;
+    backdrop-filter: blur(var(--card_filter));
+    -webkit-backdrop-filter: blur(var(--card_filter));
+}
+.section-subtitle {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--purple_text_color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.section-subtitle svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--fill);
+}
+
+/* 图片网格 */
+.img-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+.img-item {
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.img-item:hover {
+    transform: translateY(-5px);
+}
+
+/* 音乐区【两列布局】适配新增音乐 */
+.music-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 18px;
+    width: 100%;
+}
+.music-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background: var(--item_hover_color);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+    min-width: 300px;
+}
+.music-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.music-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.music-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.music-info {
+    flex: 1;
+    overflow: hidden;
+}
+.music-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--main_text_color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 3px;
+}
+.music-singer {
+    font-size: 12px;
+    color: var(--item_left_text_color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+audio {
+    flex: 0 0 180px;
+    max-width: 180px;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: var(--main_text_color);
+}
+audio::-webkit-media-controls-panel {
+    background: rgba(255,255,255,0.05);
+    color: var(--main_text_color);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* 视频区【新增个人想法样式，保留B站版权/链接】 */
+.video-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+.video-item {
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--item_hover_color);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+.video-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+.video-item video {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+.video-desc {
+    padding: 15px;
+}
+.video-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--main_text_color);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.video-link, .video-copyright, .video-thought {
+    font-size: 12px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.video-link, .video-copyright {
+    color: var(--item_left_text_color);
+}
+.video-thought {
+    color: var(--purple_text_color); /* 个人想法标为主题色，突出显示 */
+    font-weight: 500;
+    margin-top: 8px; /* 与版权信息拉开间距 */
+}
+.video-link a {
+    color: var(--purple_text_color);
+    text-decoration: none;
+}
+.video-link a:hover {
+    text-decoration: underline;
+}
+
+/* 返回按钮：新增高度设置，原样式保留并增强 */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--item_bg_color);
+    border-radius: 8px;
+    color: var(--main_text_color);
+    font-size: 16px;
+    backdrop-filter: blur(var(--card_filter));
+    -webkit-backdrop-filter: blur(var(--card_filter));
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
+    height: 56px; /* 核心修改：增加按钮高度 */
+    box-sizing: border-box; /* 确保padding不影响总高度 */
+}
+.back-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--fill);
+}
+.back-btn:hover {
+    background: var(--item_hover_color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* 响应式适配：移动端音乐单列、视频/图片自适应 */
+@media (max-width: 860px) {
+    .share-title {
+        font-size: 24px;
+    }
+    .section-subtitle {
+        font-size: 18px;
+    }
+    .img-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    .video-list {
+        grid-template-columns: 1fr;
+    }
+    .video-item video {
+        height: 160px;
+    }
+    /* 移动端音乐自动切单列，避免挤压 */
+    .music-list {
+        grid-template-columns: 1fr;
+    }
+    .music-item {
+        gap: 12px;
+        padding: 12px 15px;
+    }
+    audio {
+        flex: 0 0 150px;
+        max-width: 150px;
+    }
+    /* 移动端返回按钮高度适配 */
+    .back-btn {
+        height: 48px; /* 移动端适当降低高度，更适配屏幕 */
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    .back-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+@media (max-width: 400px) {
+    .music-item {
+        flex-wrap: wrap;
+    }
+    audio {
+        flex: 1 0 100%;
+        max-width: 100%;
+        margin-top: 8px;
+    }
+}

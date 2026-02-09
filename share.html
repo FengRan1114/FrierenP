@@ -3,272 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pan Feng's Share - 资源分享</title>
+    <title>Pan Feng's Share</title>
     <link rel="icon" href="./static/img/favicon1.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 引入公共样式 -->
     <link rel="stylesheet" href="./static/css/root.css">
     <link rel="stylesheet" href="./static/css/style.css">
+    <!-- 引入Share页面专属样式 -->
+    <link rel="stylesheet" href="./static/css/share.css">
     <style>
-        /* 全局样式 */
-        .share-main {
-            max-width: 1150px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        .share-title {
-            font-size: 32px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--main_text_color);
-        }
-        .share-title svg {
-            width: 36px;
-            height: 36px;
-            fill: var(--fill);
-        }
-        .share-section {
-            background: var(--item_bg_color);
-            border-radius: 13px;
-            padding: 25px;
-            backdrop-filter: blur(var(--card_filter));
-            -webkit-backdrop-filter: blur(var(--card_filter));
-        }
-        .section-subtitle {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--purple_text_color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .section-subtitle svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--fill);
-        }
-
-        /* 图片网格 */
-        .img-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .img-item {
-            border-radius: 8px;
-            overflow: hidden;
-            aspect-ratio: 1/1;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .img-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .img-item:hover {
-            transform: translateY(-5px);
-        }
-
-        /* 音乐区【两列布局】适配新增音乐 */
-        .music-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 18px;
-            width: 100%;
-        }
-        .music-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 20px;
-            border-radius: 10px;
-            background: var(--item_hover_color);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.08);
-            min-width: 300px;
-        }
-        .music-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .music-cover {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .music-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .music-info {
-            flex: 1;
-            overflow: hidden;
-        }
-        .music-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--main_text_color);
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            margin-bottom: 3px;
-        }
-        .music-singer {
-            font-size: 12px;
-            color: var(--item_left_text_color);
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-        audio {
-            flex: 0 0 180px;
-            max-width: 180px;
-            outline: none;
-            border: none;
-            background: transparent;
-            color: var(--main_text_color);
-        }
-        audio::-webkit-media-controls-panel {
-            background: rgba(255,255,255,0.05);
-            color: var(--main_text_color);
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* 视频区【新增个人想法样式，保留B站版权/链接】 */
-        .video-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-        }
-        .video-item {
-            border-radius: 10px;
-            overflow: hidden;
-            background: var(--item_hover_color);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .video-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-        .video-item video {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px 10px 0 0;
-        }
-        .video-desc {
-            padding: 15px;
-        }
-        .video-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--main_text_color);
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        .video-link, .video-copyright, .video-thought {
-            font-size: 12px;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .video-link, .video-copyright {
-            color: var(--item_left_text_color);
-        }
-        .video-thought {
-            color: var(--purple_text_color); /* 个人想法标为主题色，突出显示 */
-            font-weight: 500;
-            margin-top: 8px; /* 与版权信息拉开间距 */
-        }
-        .video-link a {
-            color: var(--purple_text_color);
-            text-decoration: none;
-        }
-        .video-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* 返回按钮 */
+        /* 新增：调整Back to Home按钮高度 */
         .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: var(--item_bg_color);
-            border-radius: 8px;
-            color: var(--main_text_color);
-            font-size: 16px;
-            backdrop-filter: blur(var(--card_filter));
-            -webkit-backdrop-filter: blur(var(--card_filter));
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.08);
-            text-decoration: none;
-        }
-        .back-btn svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--fill);
-        }
-        .back-btn:hover {
-            background: var(--item_hover_color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
-
-        /* 响应式适配：移动端音乐单列、视频/图片自适应 */
-        @media (max-width: 860px) {
-            .share-title {
-                font-size: 24px;
-            }
-            .section-subtitle {
-                font-size: 18px;
-            }
-            .img-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-            .video-list {
-                grid-template-columns: 1fr;
-            }
-            .video-item video {
-                height: 160px;
-            }
-            /* 移动端音乐自动切单列，避免挤压 */
-            .music-list {
-                grid-template-columns: 1fr;
-            }
-            .music-item {
-                gap: 12px;
-                padding: 12px 15px;
-            }
-            audio {
-                flex: 0 0 150px;
-                max-width: 150px;
-            }
-        }
-        @media (max-width: 400px) {
-            .music-item {
-                flex-wrap: wrap;
-            }
-            audio {
-                flex: 1 0 100%;
-                max-width: 100%;
-                margin-top: 8px;
-            }
+            height: 56px; /* 原高度是自适应，现在固定56px，视觉上更高 */
+            align-items: center; /* 确保内容垂直居中 */
         }
     </style>
 </head>
@@ -276,7 +23,7 @@
     <div class="zyyo-filter"></div>
 
     <div class="share-main">
-        <!-- 返回按钮 -->
+        <!-- 返回按钮：高度通过新增样式调整，文字不变 -->
         <a href="./index.html" class="back-btn">
             <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <path d="M224 480h640c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
@@ -285,7 +32,7 @@
            Back to Home
         </a>
 
-        <!-- 页面标题 -->
+        <!-- 页面标题：保持My Share不变（你要求改板块标题为英文） -->
         <div class="share-title">
             <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                 <path d="M854.6 370.6c-9.9-39.7-46.2-66.6-87.4-66.6h-48.9c-17.4 0-33.4 6.9-45.1 18.9L512 569.9 351.8 322.9c-11.7-12-27.7-18.9-45.1-18.9H304c-41.2 0-77.6 26.9-87.4 66.6-12.8 51.3 30.9 96.9 83.3 96.9h63.9v240c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V467.8h73.3v240c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V467.8h63.9c52.4 0 96.1-45.6 83.3-97.2zM603.3 226.2c24.7 0 44.8-20.1 44.8-44.8s-20.1-44.8-44.8-44.8-44.8 20.1-44.8 44.8 20.1 44.8 44.8 44.8z"></path>
@@ -293,141 +40,129 @@
             My Share 
         </div>
 
-        <!-- 第一板块：视频分享 -->
+        <!-- 第一板块：视频分享 → 改为Video Sharing -->
         <div class="share-section">
             <div class="section-subtitle">
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <path d="M892 104H132c-23.2 0-42 18.8-42 42v696c0 23.2 18.8 42 42 42h760c23.2 0 42-18.8 42-42V146c0-23.2-18.8-42-42-42zm-40 688H172V186h680v606zM388 792V232l304 280z"></path>
                 </svg>
-                视频分享
+                Video Sharing
             </div>
-            <div class="video-list">
-                <!-- 第一个视频：B站 荒草音乐 -->
-                <div class="video-item">
-                    <video poster="./static/img/video1_cover.jpg" preload="none" controls>
-                        <source src="./static/video/video1.mp4" type="video/mp4">
-                        你的浏览器不支持视频播放
-                    </video>
-                    <div class="video-desc">
-                        <div class="video-name">并不是打穿天山容易，而是天山那头有人民</div>
-                        <div class="video-link">
-                            <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
-                                <path d="M820 208H204c-13.3 0-24 10.7-24 24v576c0 13.3 10.7 24 24 24h616c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24zm-600 560V264h512v504H220z m120-248h272v64H340v-64zm0 128h272v64H340v-64z"/>
-                            </svg>
-                            B站链接：<a href="https://www.bilibili.com/video/BV1FBrdBFEWe" target="_blank" rel="noopener noreferrer">BV1FBrdBFEWe</a>
-                        </div>
-                        <div class="video-copyright">
-                            <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
-                                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m104-420h-66.8c-10.2 0-18.5 8.3-18.5 18.5v32.9c0 10.2 8.3 18.5 18.5 18.5H512v66.8c0 10.2-8.3 18.5-18.5 18.5h-32.9c-10.2 0-18.5-8.3-18.5-18.5V512h-66.8c-10.2 0-18.5-8.3-18.5-18.5v-32.9c0-10.2 8.3-18.5 18.5-18.5H448v-66.8c0-10.2 8.3-18.5 18.5-18.5h32.9c10.2 0 18.5 8.3 18.5 18.5v66.8h66.8c10.2 0 18.5 8.3 18.5 18.5v32.9c0 10.2-8.3 18.5-18.5 18.5z"/>
-                            </svg>
-                            博主ID：626297715 | 荒草音乐
-                        </div>
-                        <div class="video-thought">
-                            <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
-                                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m-80-424c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16zm0 128c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16z"/>
-                            </svg>
-                            阿盼感悟：中华人民共和国万岁
-                        </div>
-                    </div>
-                </div>
-                <!-- 第二个视频：B站 我有两条狗你呢 -->
-                <div class="video-item">
-                    <video poster="./static/img/video2_cover.jpg" preload="none" controls>
-                        <source src="./static/video/video2.mp4" type="video/mp4">
-                        你的浏览器不支持视频播放
-                    </video>
-                    <div class="video-desc">
-                        <div class="video-name">爱上的过程也是爱</div>
-                        <div class="video-link">
-                            <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
-                                <path d="M820 208H204c-13.3 0-24 10.7-24 24v576c0 13.3 10.7 24 24 24h616c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24zm-600 560V264h512v504H220z m120-248h272v64H340v-64zm0 128h272v64H340v-64z"/>
-                            </svg>
-                            B站链接：<a href="https://www.bilibili.com/video/BV1Ee411J7qr" target="_blank" rel="noopener noreferrer">BV1Ee411J7qr</a>
-                        </div>
-                        <div class="video-copyright">
-                            <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
-                                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m104-420h-66.8c-10.2 0-18.5 8.3-18.5 18.5v32.9c0 10.2 8.3 18.5 18.5 18.5H512v66.8c0 10.2-8.3 18.5-18.5 18.5h-32.9c-10.2 0-18.5-8.3-18.5-18.5V512h-66.8c-10.2 0-18.5-8.3-18.5-18.5v-32.9c0-10.2 8.3-18.5 18.5-18.5H448v-66.8c0-10.2 8.3-18.5 18.5-18.5h32.9c10.2 0 18.5 8.3 18.5 18.5v66.8h66.8c10.2 0 18.5 8.3 18.5 18.5v32.9c0 10.2-8.3 18.5-18.5 18.5z"/>
-                            </svg>
-                            博主ID：5770768 | 我有两条狗你呢
-                        </div>
-                        <div class="video-thought">
-                            <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
-                                <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m-80-424c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16zm0 128c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16z"/>
-                            </svg>
-                            阿盼感悟：为辛梅尔的爱动容
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- 空容器：视频列表由JS渲染 -->
+            <div class="video-list"></div>
         </div>
 
-        <!-- 第二板块：图片分享 -->
+        <!-- 第二板块：图片分享 → 改为Image Sharing -->
         <div class="share-section">
             <div class="section-subtitle">
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <path d="M880 256H736v-64c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v64H144c-35.3 0-64 28.7-64 64v512c0 35.3 28.7 64 64 64h736c35.3 0 64-28.7 64-64V320c0-35.3-28.7-64-64-64zM352 208h320v48H352v-48zm488 544H184V320h128v64c0 4.4 3.6 8 8 8h256c4.4 0 8-3.6 8-8v-64h128v432zM288 488c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40zm0 128c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z"></path>
                 </svg>
-                图片分享
+                Image Sharing
             </div>
-            <div class="img-grid">
-                <div class="img-item"><img src="./static/img/share1.jpg" alt="风景照1"></div>
-                <div class="img-item"><img src="./static/img/share2.jpg" alt="风景照2"></div>
-                <div class="img-item"><img src="./static/img/share3.jpg" alt="生活照1"></div>
-                <div class="img-item"><img src="./static/img/share4.jpg" alt="生活照2"></div>
-                <div class="img-item"><img src="./static/img/share5.jpg" alt="生活照3"></div>
-            </div>
+            <!-- 空容器：图片列表由JS渲染 -->
+            <div class="img-grid"></div>
         </div>
 
-        <!-- 第三板块：音乐分享（两列布局） -->
+        <!-- 第三板块：音乐分享 → 改为Music Sharing（你要求的Music相关） -->
         <div class="share-section">
             <div class="section-subtitle">
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <path d="M928 256h-80v-64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64v448c0 35.3 28.7 64 64 64h560c35.3 0 64-28.7 64-64v-64h80c17.7 0 32-14.3 32-32V288c0-17.7-14.3-32-32-32zM224 192h512v416H224V192zm640 268c0 4.4-3.6 8-8 8h-56c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h56c4.4 0 8 3.6 8 8v48zm0 104c0 4.4-3.6 8-8 8h-56c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h56c4.4 0 8 3.6 8 8v48zm0 104c0 4.4-3.6 8-8 8h-56c-4.4 0-8-3.6-8-8v-48c0-4.4 3.6-8 8-8h56c4.4 0 8 3.6 8 8v48zM416 320c0-26.5 21.5-48 48-48s48 21.5 48 48v384c0 26.5-21.5 48-48 48s-48-21.5-48-48V320zm128 0c0-26.5 21.5-48 48-48s48 21.5 48 48v384c0 26.5-21.5 48-48 48s-48-21.5-48-48V320z"></path>
                 </svg>
-                音乐分享
+                Music Sharing
             </div>
-            <div class="music-list">
-                <!-- 音乐1 -->
-                <div class="music-item">
-                    <div class="music-cover"><img src="./static/img/i43.png" alt="人间乐 封面"></div>
-                    <div class="music-info">
-                        <div class="music-name">人间乐</div>
-                        <div class="music-singer">宋佳</div>
-                    </div>
-                    <audio controls preload="none">
-                        <source src="./static/music/renjianyue.mp3" type="audio/mpeg">
-                        你的浏览器不支持音频播放
-                    
-                </div>
-                <!-- 音乐2 -->
-                <div class="music-item">
-                    <div class="music-cover"><img src="./static/img/i21.png" alt="平凡之路 封面"></div>
-                    <div class="music-info">
-                        <div class="music-name">不属于地球上的</div>
-                        <div class="music-singer">江楠江楠_</div>
-                    </div>
-                    <audio controls preload="none">
-                        <source src="./static/music/bushuyu.ncm" type="audio/mpeg">
-                        你的浏览器不支持音频播放
-                    
-                </div>
-                <!-- 新增音乐直接复制上面整段即可，自动两列排列 -->
-                <!-- 音乐3 示例模板 -->
-                <div class="music-item">
-                    <div class="music-cover"><img src="./static/img/xxx.png" alt="音乐封面"></div>
-                    <div class="music-info">
-                        <div class="music-name">新增音乐名</div>
-                        <div class="music-singer">歌手/专辑信息</div>
-                    </div>
-                    <audio controls preload="none">
-                        <source src="./static/music/xxx.mp3" type="audio/mpeg">
-                        你的浏览器不支持音频播放
-                    
-                </div>
-            </div>
+            <!-- 空容器：音乐列表由JS渲染 -->
+            <div class="music-list"></div>
         </div>
     </div>
 
+    <!-- 1. 先引入数据文件 -->
+    <script src="./static/js/share-data.js"></script>
+    <!-- 2. 再引入公共JS -->
     <script src="./static/js/script.js"></script>
+    <!-- 3. 新增渲染逻辑（也可以放到share-data.js里） -->
+    <script>
+        // 页面加载完成后执行渲染
+        window.addEventListener('DOMContentLoaded', function() {
+            // ========== 渲染视频列表 ==========
+            const videoListEl = document.querySelector('.video-list');
+            if (shareData.videos && shareData.videos.length > 0) {
+                let videoHtml = '';
+                shareData.videos.forEach(video => {
+                    // 提取B站链接最后的视频ID（如BV1FBrdBFEWe）
+                    const bvid = video.b站链接.split('/').pop();
+                    videoHtml += `
+                        <div class="video-item">
+                            <video poster="${video.cover}" preload="none" controls>
+                                <source src="${video.src}" type="video/mp4">
+                                你的浏览器不支持视频播放
+                            </video>
+                            <div class="video-desc">
+                                <div class="video-name">${video.name}</div>
+                                <div class="video-link">
+                                    <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
+                                        <path d="M820 208H204c-13.3 0-24 10.7-24 24v576c0 13.3 10.7 24 24 24h616c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24zm-600 560V264h512v504H220z m120-248h272v64H340v-64zm0 128h272v64H340v-64z"/>
+                                    </svg>
+                                    Bilibili Link: <a href="${video.b站链接}" target="_blank" rel="noopener noreferrer">${bvid}</a>
+                                </div>
+                                <div class="video-copyright">
+                                    <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
+                                        <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m104-420h-66.8c-10.2 0-18.5 8.3-18.5 18.5v32.9c0 10.2 8.3 18.5 18.5 18.5H512v66.8c0 10.2-8.3 18.5-18.5 18.5h-32.9c-10.2 0-18.5-8.3-18.5-18.5V512h-66.8c-10.2 0-18.5-8.3-18.5-18.5v-32.9c0-10.2 8.3-18.5 18.5-18.5H448v-66.8c0-10.2 8.3-18.5 18.5-18.5h32.9c10.2 0 18.5 8.3 18.5 18.5v66.8h66.8c10.2 0 18.5 8.3 18.5 18.5v32.9c0 10.2-8.3 18.5-18.5 18.5z"/>
+                                    </svg>
+                                    ${video.copyright}
+                                </div>
+                                <div class="video-thought">
+                                    <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
+                                        <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z m-80-424c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16zm0 128c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H440c-4.4 0-8-3.6-8-8v-16z"/>
+                                    </svg>
+                                    ${video.thought}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                videoListEl.innerHTML = videoHtml;
+            }
+
+            // ========== 渲染图片列表 ==========
+            const imgGridEl = document.querySelector('.img-grid');
+            if (shareData.images && shareData.images.length > 0) {
+                let imgHtml = '';
+                shareData.images.forEach(img => {
+                    imgHtml += `
+                        <div class="img-item">
+                            <img src="${img.src}" alt="${img.alt}">
+                        </div>
+                    `;
+                });
+                imgGridEl.innerHTML = imgHtml;
+            }
+
+            // ========== 渲染音乐列表 ==========
+            const musicListEl = document.querySelector('.music-list');
+            if (shareData.musics && shareData.musics.length > 0) {
+                let musicHtml = '';
+                shareData.musics.forEach(music => {
+                    musicHtml += `
+                        <div class="music-item">
+                            <div class="music-cover">
+                                <img src="${music.cover}" alt="${music.name} Cover">
+                            </div>
+                            <div class="music-info">
+                                <div class="music-name">${music.name}</div>
+                                <div class="music-singer">${music.singer}</div>
+                            </div>
+                            <audio controls preload="none">
+                                <source src="${music.src}" type="audio/mpeg">
+                                Your browser does not support audio playback
+                            </audio>
+                        </div>
+                    `;
+                });
+                musicListEl.innerHTML = musicHtml;
+            }
+        });
+    </script>
 </body>
 </html>
