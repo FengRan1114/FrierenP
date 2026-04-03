@@ -129,4 +129,7 @@ function renderSharePage() {
     }
 }
 
+// ========== 渲染心情记录 ==========
+
+
 window.addEventListener('DOMContentLoaded', renderSharePage);
