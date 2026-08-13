@@ -18,16 +18,16 @@ const shareData = {
         }
     ],
     images: [
-        { src: "./static/img/share1.jpg", thumb: "./static/img/thumbs/share1.webp", alt: "风景照1" },
-        { src: "./static/img/share2.jpg", thumb: "./static/img/thumbs/share2.webp", alt: "风景照2" },
-        { src: "./static/img/share3.jpg", thumb: "./static/img/thumbs/share3.webp", alt: "生活照1" },
-        { src: "./static/img/share4.jpg", thumb: "./static/img/thumbs/share4.webp", alt: "生活照2" },
-        { src: "./static/img/share5.jpg", thumb: "./static/img/thumbs/share5.webp", alt: "生活照3" },
-        { src: "./static/img/share6.png", thumb: "./static/img/thumbs/share6.webp", alt: "分享图片6" },
-        { src: "./static/img/share7.png", thumb: "./static/img/thumbs/share7.webp", alt: "分享图片7" },
-        { src: "./static/img/share8.png", thumb: "./static/img/thumbs/share8.webp", alt: "分享图片8" },
-        { src: "./static/img/share9.png", thumb: "./static/img/thumbs/share9.webp", alt: "分享图片9" },
-        { src: "./static/img/share10.png", thumb: "./static/img/thumbs/share10.webp", alt: "分享图片10" }
+        { src: "./static/img/share1.jpg", thumb: "./static/img/thumbs/share1.webp", alt: "Anime scene 01" },
+        { src: "./static/img/share2.jpg", thumb: "./static/img/thumbs/share2.webp", alt: "Anime scene 02" },
+        { src: "./static/img/share3.jpg", thumb: "./static/img/thumbs/share3.webp", alt: "Anime scene 03" },
+        { src: "./static/img/share4.jpg", thumb: "./static/img/thumbs/share4.webp", alt: "Anime scene 04" },
+        { src: "./static/img/share5.jpg", thumb: "./static/img/thumbs/share5.webp", alt: "Anime scene 05" },
+        { src: "./static/img/share6.png", thumb: "./static/img/thumbs/share6.webp", alt: "Anime scene 06" },
+        { src: "./static/img/share7.png", thumb: "./static/img/thumbs/share7.webp", alt: "Anime scene 07" },
+        { src: "./static/img/share8.png", thumb: "./static/img/thumbs/share8.webp", alt: "Anime scene 08" },
+        { src: "./static/img/share9.png", thumb: "./static/img/thumbs/share9.webp", alt: "Anime scene 09" },
+        { src: "./static/img/share10.png", thumb: "./static/img/thumbs/share10.webp", alt: "Anime scene 10" }
     ],
     musics: [
         { cover: "./static/img/i43.png", name: "人间乐", singer: "宋佳", src: "./static/music/renjianyue.mp3" },
@@ -82,12 +82,12 @@ function setupAlbum() {
         </div>
         <div class="album-info">
             <div>
-                <span class="album-kicker">Selected moment</span>
+                <span class="album-kicker">Selected scene</span>
                 <strong class="album-title"></strong>
             </div>
-            <span class="album-hint">Use arrows or choose a frame</span>
+            <span class="album-hint">Choose a scene</span>
         </div>
-        <div class="album-filmstrip" role="listbox" aria-label="Choose a photo"></div>`;
+        <div class="album-filmstrip" role="listbox" aria-label="Choose an anime scene"></div>`;
 
     const mainImage = album.querySelector('.album-main img');
     const counter = album.querySelector('.album-counter');

@@ -30,6 +30,7 @@
     font-size: 14px;
     font-weight: 600;
     transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(16px) saturate(1.08);
 }
 
 .back-button svg {
@@ -102,6 +103,7 @@
     border: 1px solid var(--border-color);
     border-radius: 18px;
     box-shadow: var(--shadow);
+    backdrop-filter: blur(18px) saturate(1.08);
 }
 
 .section-heading {
@@ -150,7 +152,7 @@
 .video-item {
     min-width: 0;
     overflow: hidden;
-    background: var(--main-bg-color);
+    background: color-mix(in srgb, var(--item-bg-color) 86%, transparent);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
@@ -443,7 +445,7 @@
     height: 72px;
     padding: 0;
     overflow: hidden;
-    background: var(--main-bg-color);
+    background: color-mix(in srgb, var(--item-bg-color) 86%, transparent);
     border: 2px solid transparent;
     border-radius: 12px;
     cursor: pointer;

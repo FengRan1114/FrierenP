@@ -21,15 +21,33 @@ html {
 }
 
 body {
+    position: relative;
+    isolation: isolate;
     min-height: 100vh;
     margin: 0;
     color: var(--main-text-color);
     font-family: "Ubuntu Local", system-ui, -apple-system, "Segoe UI", sans-serif;
-    background:
-        radial-gradient(circle at 8% 12%, rgba(103, 89, 232, 0.12), transparent 26rem),
-        radial-gradient(circle at 92% 8%, rgba(52, 120, 220, 0.10), transparent 24rem),
-        var(--main-bg-color);
+    background: transparent;
     transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+body::before,
+body::after {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    content: "";
+    pointer-events: none;
+}
+
+body::before {
+    background: var(--main-bg-color) url(../img/frieren-background.webp) center 36% / cover no-repeat;
+}
+
+body::after {
+    z-index: -1;
+    background: var(--page-overlay);
+    backdrop-filter: saturate(0.9);
 }
 
 .zyyo-filter {
@@ -107,6 +125,7 @@ a {
     border: 1px solid var(--border-color);
     border-radius: 16px;
     box-shadow: var(--shadow);
+    backdrop-filter: blur(16px) saturate(1.08);
 }
 
 .left-des {
@@ -294,6 +313,7 @@ a {
     align-items: center;
     gap: 8px;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(16px) saturate(1.08);
 }
 
 .theme-row:hover {
@@ -354,6 +374,7 @@ a {
     box-shadow: var(--shadow);
     align-items: center;
     transition: transform 0.22s ease, background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    backdrop-filter: blur(16px) saturate(1.08);
 }
 
 .projectItem:hover {
