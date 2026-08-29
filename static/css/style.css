@@ -152,35 +152,12 @@ a {
     fill: var(--fill);
 }
 
-.share-link {
-    display: flex;
-    min-height: 60px;
-    padding: 0 20px;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+.left-des-item[href] {
+    transition: color 0.2s ease;
 }
 
-.share-link span {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 15px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.share-link .icon {
-    flex: 0 0 20px;
-    width: 20px;
-    height: 20px;
-    fill: var(--fill);
-}
-
-.share-link:hover {
-    background: var(--item-hover-color);
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
+.left-des-item[href]:hover {
+    color: var(--accent-color);
 }
 
 .left-time {
@@ -433,8 +410,7 @@ a {
     transform: translateY(-3px) rotate(5deg);
 }
 
-.projectItem:focus-visible,
-.share-link:focus-visible {
+.projectItem:focus-visible {
     outline: 3px solid var(--accent-color);
     outline-offset: 3px;
 }

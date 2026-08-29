@@ -32,7 +32,8 @@ const shareData = {
     musics: [
         { cover: "./static/img/i43.png", name: "人间乐", singer: "宋佳", src: "./static/music/renjianyue.mp3" },
         { cover: "./static/img/i21.png", name: "不属于地球上的", singer: "江楠江楠_", src: "./static/music/bushuyu.mp3" },
-        { cover: "./static/img/qinxian-cover.webp", name: "谁动了我的琴弦", singer: "周笔畅", src: "./static/music/qinxian.mp3" }
+        { cover: "./static/img/qinxian-cover.webp", name: "谁动了我的琴弦", singer: "周笔畅", src: "./static/music/qinxian.mp3" },
+        { cover: "./static/img/record-player-cover.svg", name: "Record Player", singer: "Daisy the Great / AJR", src: "./static/music/record-player.mp3" }
     ]
 };
 
@@ -103,7 +104,7 @@ function setupAlbum() {
     function selectImage(index, scrollThumbnail = true) {
         currentIndex = (index + shareData.images.length) % shareData.images.length;
         const image = shareData.images[currentIndex];
-        mainImage.src = image.thumb;
+        mainImage.src = image.src;
         mainImage.alt = image.alt;
         title.textContent = image.alt;
         counter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(shareData.images.length).padStart(2, '0')}`;
